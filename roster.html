@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Roster • Synex Esports</title>
+  <meta name="description" content="Synex Esports staff roster and admin management" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-title-link"><h1 class="brand-title">Synex Esports</h1></a>
+        <p class="brand-sub">Professional • Fair • Community Driven</p>
+      </div>
+
+      <nav class="top-nav" role="navigation" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Welcome</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="apps.html">Applications</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="roster.html" class="active">Roster</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="loginBtn" class="cta">Supervisor Login</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="main" role="main">
+    <section class="section container">
+      <h2 class="section-title">Staff Roster</h2>
+
+      <div class="roster-controls">
+        <div class="left-controls">
+          <input id="searchInput" type="search" placeholder="Search staff by name or role" aria-label="Search staff">
+          <select id="sortSelect" aria-label="Sort roster">
+            <option value="name-asc">Name ↑</option>
+            <option value="name-desc">Name ↓</option>
+            <option value="role-asc">Role ↑</option>
+            <option value="role-desc">Role ↓</option>
+          </select>
+        </div>
+
+        <div class="right-controls">
+          <button id="addStaffBtn" class="cta" disabled>Add Staff</button>
+          <button id="exportCsvBtn" class="cta">Export CSV</button>
+          <label class="import-label">
+            <input id="importJsonInput" type="file" accept="application/json" style="display:none">
+            <span class="cta">Import JSON</span>
+          </label>
+          <button id="logoutBtn" class="cta" style="display:none">Logout</button>
+        </div>
+      </div>
+
+      <div id="rosterGrid" class="roster-grid" aria-live="polite"></div>
+
+      <div id="emptyState" class="card about-card reveal" style="display:none;margin-top:18px">
+        <p>No staff found. If you're an admin, click Add Staff to create roster entries.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© 2025 Synex Esports — All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Admin Login Modal -->
+  <div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content" role="document">
+      <button class="modal-close" aria-label="Close">✕</button>
+      <h3>Supervisor Login</h3>
+      <form id="loginForm">
+        <label for="adminPassword">Password</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" required>
+        <p class="muted small">This demo uses a client-side password. For production, use server-side auth.</p>
+        <div style="margin-top:12px">
+          <button type="submit" class="cta">Login</button>
+        </div>
+        <p id="loginMsg" class="muted small" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add/Edit Staff Modal -->
+  <div id="staffModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content" role="document">
+      <button class="modal-close" aria-label="Close">✕</button>
+      <h3 id="staffModalTitle">Add Staff Member</h3>
+      <form id="staffForm">
+        <input type="hidden" id="staffId">
+        <label for="staffName">Name</label>
+        <input id="staffName" type="text" required>
+
+        <label for="staffRole">Role</label>
+        <input id="staffRole" type="text" required>
+
+        <label for="staffBio">Short Bio</label>
+        <textarea id="staffBio" rows="3" placeholder="Optional"></textarea>
+
+        <label for="staffAvatar">Avatar URL</label>
+        <input id="staffAvatar" type="url" placeholder="https://... (optional)">
+
+        <div style="margin-top:12px">
+          <button type="submit" class="cta">Save</button>
+          <button type="button" id="staffCancel" class="btn-ghost">Cancel</button>
+        </div>
+        <p id="staffFormMsg" class="muted small" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="roster.js" defer></script>
+</body>
+</html>

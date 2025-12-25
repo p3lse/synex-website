@@ -1,4 +1,4 @@
-// script.js - interactions for multi-page Synex site
+// script.js - interactions for multi-page Synex site (updated)
 document.addEventListener('DOMContentLoaded', () => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -62,27 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
       msg.style.color = '#bfffcf';
       newsletterForm.reset();
     });
-  }
-
-  /* Carousel (testimonials) */
-  const track = document.querySelector('.carousel-track');
-  if (track) {
-    const prev = document.querySelector('.carousel-prev');
-    const next = document.querySelector('.carousel-next');
-    const slides = Array.from(track.children);
-    let index = 0;
-    function updateCarousel() {
-      const width = track.clientWidth;
-      track.style.transform = `translateX(-${index * width}px)`;
-    }
-    window.addEventListener('resize', updateCarousel);
-    if (prev) prev.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; updateCarousel(); });
-    if (next) next.addEventListener('click', () => { index = (index + 1) % slides.length; updateCarousel(); });
-    // Auto-advance
-    let auto = setInterval(() => { index = (index + 1) % slides.length; updateCarousel(); }, 6000);
-    track.addEventListener('mouseenter', () => clearInterval(auto));
-    track.addEventListener('mouseleave', () => { auto = setInterval(() => { index = (index + 1) % slides.length; updateCarousel(); }, 6000); });
-    updateCarousel();
   }
 
   /* Ensure external links open safely */
