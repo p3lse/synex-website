@@ -74,3 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Tab') document.documentElement.classList.add('user-is-tabbing');
   });
 });
+// Auto-set active nav link
+document.querySelectorAll('.top-nav a').forEach(a => {
+  try {
+    const href = new URL(a.href).pathname;
+    if (href === location.pathname || (href === '/index.html' && location.pathname === '/')) {
+      a.classList.add('active');
+    }
+  } catch(e){}
+});
