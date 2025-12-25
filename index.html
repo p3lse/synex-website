@@ -22,16 +22,22 @@
           <li><a href="index.html">Welcome</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="apps.html">Applications</a></li>
+          <li><a href="donate.html">Donate</a></li>
         </ul>
       </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" aria-label="Toggle theme">🌗</button>
+      </div>
     </div>
   </header>
 
   <main id="main" class="main" role="main">
+    <!-- HERO -->
     <section class="hero container">
       <div class="hero-inner">
         <h2 class="hero-title">Welcome</h2>
-        <p class="hero-sub">Welcome to the official Synex Esports website. Synex is a fast‑growing, active community focused on competitive play, friendly events, and a safe environment for all members. Explore our staff applications, internal affairs process, and join our Discord to get involved.</p>
+        <p class="hero-sub">Welcome to the official Synex Esports website. Synex is a fast‑growing, active community focused on competitive play, friendly events, and a safe environment for all members. Explore staff applications, our reporting system, and join our Discord to get involved.</p>
         <div class="hero-ctas">
           <a class="btn-primary" href="apps.html">Apply / Join</a>
           <a class="btn-ghost" href="https://discord.gg/fearsynex" target="_blank" rel="noopener noreferrer">Open Discord</a>
@@ -39,32 +45,105 @@
       </div>
     </section>
 
-    <section id="highlights" class="section container">
-      <h2 class="section-title">Highlights</h2>
-      <div class="features-grid">
-        <div class="feature reveal">
-          <h4>Fair Play</h4>
-          <p>Clear rules, consistent enforcement, and a dedicated Internal Affairs team.</p>
+    <!-- LATEST UPDATES -->
+    <section id="updates" class="section container">
+      <h2 class="section-title">Latest Updates</h2>
+      <div class="updates-grid">
+        <article class="update reveal">
+          <h3>New Internal Affairs Form</h3>
+          <p>We launched an improved reporting form to make investigations faster and more transparent.</p>
+          <time datetime="2025-12-01">Dec 1, 2025</time>
+        </article>
+        <article class="update reveal">
+          <h3>Holiday Tournament</h3>
+          <p>Signups open for our community holiday tournament — prizes and shoutouts for winners.</p>
+          <time datetime="2025-12-10">Dec 10, 2025</time>
+        </article>
+      </div>
+    </section>
+
+    <!-- EVENTS PREVIEW -->
+    <section id="events" class="section container">
+      <h2 class="section-title">Upcoming Events</h2>
+      <div class="events">
+        <div class="event reveal">
+          <h4>Community Scrim Night</h4>
+          <p>Casual scrims and coaching sessions. All skill levels welcome.</p>
+          <p class="muted">Dec 28 • 7:00 PM AEST</p>
         </div>
-        <div class="feature reveal">
-          <h4>Active Events</h4>
-          <p>Regular tournaments, casual nights, and community-driven events for all skill levels.</p>
-        </div>
-        <div class="feature reveal">
-          <h4>Supportive Staff</h4>
-          <p>Trained staff who prioritize member safety and fast, professional responses.</p>
-        </div>
-        <div class="feature reveal">
-          <h4>Growth Focused</h4>
-          <p>Owners and staff work continuously to improve the community experience and expand opportunities.</p>
+        <div class="event reveal">
+          <h4>Ranked Tournament</h4>
+          <p>Competitive bracket with seeded matches and prizes.</p>
+          <p class="muted">Jan 15 • 6:00 PM AEST</p>
         </div>
       </div>
     </section>
 
+    <!-- FEATURES -->
+    <section id="features" class="section container">
+      <h2 class="section-title">What Makes Synex Stand Out</h2>
+      <div class="features-grid">
+        <div class="feature reveal">
+          <h4>Unique Reporting</h4>
+          <p>Dedicated Internal Affairs team and a transparent reporting system.</p>
+        </div>
+        <div class="feature reveal">
+          <h4>Professional Staff</h4>
+          <p>Trained staff with quick response times and clear escalation paths.</p>
+        </div>
+        <div class="feature reveal">
+          <h4>Community Events</h4>
+          <p>Regular tournaments, casual nights, and community-driven events.</p>
+        </div>
+        <div class="feature reveal">
+          <h4>Supportive Culture</h4>
+          <p>Respectful environment with clear rules and fair moderation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS CAROUSEL -->
+    <section id="testimonials" class="section container">
+      <h2 class="section-title">Community Voices</h2>
+      <div class="carousel">
+        <button class="carousel-prev" aria-label="Previous testimonial">◀</button>
+        <div class="carousel-track">
+          <blockquote class="testimonial reveal">
+            <p>"Synex helped me improve my gameplay and meet great teammates."</p>
+            <cite>— PlayerOne</cite>
+          </blockquote>
+          <blockquote class="testimonial reveal">
+            <p>"Staff are professional and quick to respond. The reporting system works."</p>
+            <cite>— GamerGal</cite>
+          </blockquote>
+          <blockquote class="testimonial reveal">
+            <p>"Events are fun and well-run. Great prizes and community spirit."</p>
+            <cite>— CoachK</cite>
+          </blockquote>
+        </div>
+        <button class="carousel-next" aria-label="Next testimonial">▶</button>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter" class="section container">
+      <h2 class="section-title">Stay Updated</h2>
+      <div class="card about-card reveal">
+        <p>Sign up for our newsletter to get event reminders, staff openings, and important announcements.</p>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          <button type="submit" class="cta">Subscribe</button>
+          <p id="newsletterMsg" class="muted small" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- CTA -->
     <section id="cta" class="section container">
       <div class="card about-card reveal">
-        <h3>Get Started</h3>
-        <p>Ready to join Synex Esports? Visit the Applications page to apply for staff or Internal Affairs, or jump straight into our Discord to meet the community.</p>
+        <h3>Ready to join Synex?</h3>
+        <p>Visit the Applications page to apply for staff or Internal Affairs, or jump straight into our Discord to meet the community.</p>
         <p><a class="cta" href="apps.html">Go to Applications</a></p>
       </div>
     </section>
@@ -73,6 +152,7 @@
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <p>© 2025 Synex Esports — All Rights Reserved</p>
+      <p class="muted small">Owners: Jack, Deadly, Lucas, Ensena</p>
     </div>
   </footer>
 
