@@ -4,7 +4,6 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Hardcoded demo password (client-side). For production, never do this.
   const DEMO_ADMIN_PASSWORD = 'SYNEX_aDMIN1';
 
   // DOM
@@ -12,11 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginModal = document.getElementById('loginModal');
   const loginForm = document.getElementById('loginForm');
   const loginMsg = document.getElementById('loginMsg');
-  const loginCloseBtns = loginModal.querySelectorAll('.modal-close');
+  const loginCloseBtns = loginModal ? loginModal.querySelectorAll('.modal-close') : [];
 
   const staffModal = document.getElementById('staffModal');
   const staffForm = document.getElementById('staffForm');
-  const staffModalCloseBtns = staffModal.querySelectorAll('.modal-close');
+  const staffModalCloseBtns = staffModal ? staffModal.querySelectorAll('.modal-close') : [];
   const staffCancel = document.getElementById('staffCancel');
   const staffModalTitle = document.getElementById('staffModalTitle');
 
@@ -34,12 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'synex_staff_v1';
   const ADMIN_SESSION_KEY = 'synex_admin_session';
 
-  // Sample initial roster (will be used if no data in localStorage)
+  // Sample initial roster
   const SAMPLE_ROSTER = [
     { id: genId(), name: 'Jack', role: 'Owner / Community Manager', bio: 'Co-owner and event lead.', avatar: '' },
     { id: genId(), name: 'Deadly', role: 'Owner / Moderation Lead', bio: 'Co-owner and moderation lead.', avatar: '' },
-    { id: genId(), name: 'Lucas', role: 'Owner / Technical Lead', bio: 'Donor and technical lead. DM for updates.', avatar: '' },
-    { id: genId(), name: 'Ensena', role: 'Owner / Partnerships', bio: 'Co-owner handling partnerships and outreach.', avatar: '' }
+    { id: genId(), name: 'Lucas', role: 'Owner / Technical Lead', bio: 'Donor and technical lead. DM for updates.', avatar: '' }
   ];
 
   // Utilities
@@ -93,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
           img.alt = staff.name + ' avatar';
           left.appendChild(img);
         } else {
-          left.innerHTML = `<div style="text-align:center;color:var(--muted);font-weight:700">${(staff.name||'').split(' ').map(n=>n[0]).slice(0,2).join('')}</div>`;
+          left.innerHTML = `<div style="text-align:center;color:var(--muted);font-weight:800">${(staff.name||'').split(' ').map(n=>n[0]).slice(0,2).join('')}</div>`;
         }
 
         const body = document.createElement('div');
@@ -109,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         viewBtn.className = 'btn-ghost';
         viewBtn.textContent = 'View';
         viewBtn.addEventListener('click', () => showStaffDetails(staff));
-
         actions.appendChild(viewBtn);
 
         if (isAdmin()) {
@@ -148,55 +145,54 @@ document.addEventListener('DOMContentLoaded', () => {
   // Escape HTML helper
   function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  // Show staff details (simple modal alert for demo)
+  // Show staff details (simple alert for demo)
   function showStaffDetails(staff){
     const lines = [`Name: ${staff.name}`, `Role: ${staff.role}`, `Bio: ${staff.bio||'(none)'}`];
     if (staff.avatar) lines.push(`Avatar: ${staff.avatar}`);
     alert(lines.join('\n'));
   }
 
-  // Admin login modal controls
-  function openModal(modal){ modal.setAttribute('aria-hidden','false'); modal.querySelector('input,button,textarea')?.focus(); }
-  function closeModal(modal){ modal.setAttribute('aria-hidden','true'); }
+  // Modal helpers
+  function openModal(modal){ if (!modal) return; modal.setAttribute('aria-hidden','false'); modal.querySelector('input,button,textarea')?.focus(); }
+  function closeModal(modal){ if (!modal) return; modal.setAttribute('aria-hidden','true'); }
 
-  loginBtn.addEventListener('click', () => openModal(loginModal));
+  if (loginBtn) loginBtn.addEventListener('click', () => openModal(loginModal));
   loginCloseBtns.forEach(b => b.addEventListener('click', () => closeModal(loginModal)));
 
-  loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const pw = document.getElementById('adminPassword').value || '';
-    if (pw === DEMO_ADMIN_PASSWORD) {
-      setAdmin(true);
-      loginMsg.textContent = 'Login successful.';
-      loginMsg.style.color = '#bfffcf';
-      closeModal(loginModal);
-    } else {
-      loginMsg.textContent = 'Incorrect password.';
-      loginMsg.style.color = '#ffb4b4';
-    }
-    loginForm.reset();
-  });
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const pw = document.getElementById('adminPassword').value || '';
+      if (pw === DEMO_ADMIN_PASSWORD) {
+        setAdmin(true);
+        loginMsg.textContent = 'Login successful.';
+        loginMsg.style.color = '#bfffcf';
+        closeModal(loginModal);
+      } else {
+        loginMsg.textContent = 'Incorrect password.';
+        loginMsg.style.color = '#ffb4b4';
+      }
+      loginForm.reset();
+    });
+  }
 
   // Update UI based on auth
   function updateAuthUI(){
     const admin = isAdmin();
-    addStaffBtn.disabled = !admin;
-    logoutBtn.style.display = admin ? 'inline-block' : 'none';
-    loginBtn.style.display = admin ? 'none' : 'inline-block';
-    // show edit/delete buttons by re-rendering
+    if (addStaffBtn) addStaffBtn.disabled = !admin;
+    if (logoutBtn) logoutBtn.style.display = admin ? 'inline-block' : 'none';
+    if (loginBtn) loginBtn.style.display = admin ? 'none' : 'inline-block';
     renderRoster();
   }
 
-  logoutBtn.addEventListener('click', () => {
-    if (confirm('Log out of supervisor session?')) {
-      setAdmin(false);
-    }
+  if (logoutBtn) logoutBtn.addEventListener('click', () => {
+    if (confirm('Log out of supervisor session?')) setAdmin(false);
   });
 
   // Add/Edit staff modal
-  addStaffBtn.addEventListener('click', () => openStaffModal('add'));
+  if (addStaffBtn) addStaffBtn.addEventListener('click', () => openStaffModal('add'));
   staffModalCloseBtns.forEach(b => b.addEventListener('click', () => closeModal(staffModal)));
-  staffCancel.addEventListener('click', () => closeModal(staffModal));
+  if (staffCancel) staffCancel.addEventListener('click', () => closeModal(staffModal));
 
   function openStaffModal(mode, id){
     if (!isAdmin()) { alert('Supervisor login required to manage staff.'); return; }
@@ -218,41 +214,39 @@ document.addEventListener('DOMContentLoaded', () => {
     openModal(staffModal);
   }
 
-  staffForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const id = document.getElementById('staffId').value;
-    const name = (document.getElementById('staffName').value || '').trim();
-    const role = (document.getElementById('staffRole').value || '').trim();
-    const bio = (document.getElementById('staffBio').value || '').trim();
-    const avatar = (document.getElementById('staffAvatar').value || '').trim();
+  if (staffForm) {
+    staffForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('staffId').value;
+      const name = (document.getElementById('staffName').value || '').trim();
+      const role = (document.getElementById('staffRole').value || '').trim();
+      const bio = (document.getElementById('staffBio').value || '').trim();
+      const avatar = (document.getElementById('staffAvatar').value || '').trim();
 
-    if (!name || !role) {
-      document.getElementById('staffFormMsg').textContent = 'Name and role are required.';
-      document.getElementById('staffFormMsg').style.color = '#ffb4b4';
-      return;
-    }
-
-    if (id) {
-      // edit
-      const idx = roster.findIndex(s => s.id === id);
-      if (idx >= 0) {
-        roster[idx] = { id, name, role, bio, avatar };
+      if (!name || !role) {
+        document.getElementById('staffFormMsg').textContent = 'Name and role are required.';
+        document.getElementById('staffFormMsg').style.color = '#ffb4b4';
+        return;
       }
-    } else {
-      // add
-      roster.push({ id: genId(), name, role, bio, avatar });
-    }
-    saveRoster(roster);
-    renderRoster();
-    closeModal(staffModal);
-  });
+
+      if (id) {
+        const idx = roster.findIndex(s => s.id === id);
+        if (idx >= 0) roster[idx] = { id, name, role, bio, avatar };
+      } else {
+        roster.push({ id: genId(), name, role, bio, avatar });
+      }
+      saveRoster(roster);
+      renderRoster();
+      closeModal(staffModal);
+    });
+  }
 
   // Search & sort
-  searchInput.addEventListener('input', () => renderRoster());
-  sortSelect.addEventListener('change', () => renderRoster());
+  if (searchInput) searchInput.addEventListener('input', () => renderRoster());
+  if (sortSelect) sortSelect.addEventListener('change', () => renderRoster());
 
   // Export CSV
-  exportCsvBtn.addEventListener('click', () => {
+  if (exportCsvBtn) exportCsvBtn.addEventListener('click', () => {
     if (!roster || roster.length === 0) return alert('No staff to export.');
     const rows = [['Name','Role','Bio','Avatar']];
     roster.forEach(s => rows.push([s.name, s.role, s.bio || '', s.avatar || '']));
@@ -269,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Import JSON
-  importJsonInput.addEventListener('change', (e) => {
+  if (importJsonInput) importJsonInput.addEventListener('change', (e) => {
     const f = e.target.files[0];
     if (!f) return;
     const reader = new FileReader();
@@ -277,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const data = JSON.parse(ev.target.result);
         if (!Array.isArray(data)) throw new Error('JSON must be an array of staff objects.');
-        // Normalize and add ids if missing
         const imported = data.map(item => ({
           id: item.id || genId(),
           name: String(item.name || '').trim(),
@@ -294,7 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
     reader.readAsText(f);
-    // reset input
     e.target.value = '';
   });
 
@@ -305,8 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Accessibility: close modals on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (loginModal.getAttribute('aria-hidden') === 'false') closeModal(loginModal);
-      if (staffModal.getAttribute('aria-hidden') === 'false') closeModal(staffModal);
+      if (loginModal && loginModal.getAttribute('aria-hidden') === 'false') closeModal(loginModal);
+      if (staffModal && staffModal.getAttribute('aria-hidden') === 'false') closeModal(staffModal);
     }
   });
 });

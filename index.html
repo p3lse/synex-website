@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Welcome • Synex Esports</title>
+  <meta name="description" content="Welcome to Synex Esports" />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,45 +14,63 @@
         <a href="index.html"><h1 class="brand-title">Synex Esports</h1></a>
         <p class="brand-sub">Professional • Fair • Community Driven</p>
       </div>
-      <nav class="top-nav">
+
+      <nav class="top-nav" role="navigation" aria-label="Primary">
         <ul>
-          <li><a href="index.html" class="active">Welcome</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="apps.html">Applications</a></li>
-          <li><a href="team.html">Meet Our Team</a></li>
-          <li><a href="roster.html">Roster</a></li>
+          <li><a href="index.html" class="nav-link">Welcome</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="apps.html" class="nav-link">Applications</a></li>
+          <li><a href="team.html" class="nav-link">Meet Our Team</a></li>
+          <li><a href="roster.html" class="nav-link">Roster</a></li>
+          <li><a href="socials.html" class="nav-link">Socials</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
+  <main class="main">
+    <section class="hero container">
       <div class="hero-inner">
         <h2 class="hero-title">Welcome</h2>
         <p class="hero-sub">Welcome to the official Synex Esports website. Synex is a fast‑growing, active community focused on competitive play, friendly events, and a safe environment for all members. Explore staff applications, our reporting system, and join our Discord to get involved.</p>
         <div class="hero-ctas">
           <a class="btn-primary" href="apps.html">Apply / Join</a>
-          <a class="btn-ghost" href="https://discord.gg/fearsynex" target="_blank">Open Discord</a>
+          <a class="btn-ghost" href="https://discord.gg/fearsynex" target="_blank" rel="noopener noreferrer">Open Discord</a>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section container">
       <h2 class="section-title">What Makes Synex Stand Out</h2>
       <div class="features-grid">
-        <div class="feature reveal"><h4>Unique Reporting</h4><p>Dedicated Internal Affairs team and a transparent reporting system.</p></div>
-        <div class="feature reveal"><h4>Professional Staff</h4><p>Trained staff with quick response times and clear escalation paths.</p></div>
-        <div class="feature reveal"><h4>Community Events</h4><p>Regular tournaments, casual nights, and community-driven events.</p></div>
-        <div class="feature reveal"><h4>Supportive Culture</h4><p>Respectful environment with clear rules and fair moderation.</p></div>
+        <div class="feature reveal">
+          <h4>Unique Reporting</h4>
+          <p>Dedicated Internal Affairs team and a transparent reporting system.</p>
+        </div>
+        <div class="feature reveal">
+          <h4>Professional Staff</h4>
+          <p>Trained staff with quick response times and clear escalation paths.</p>
+        </div>
+        <div class="feature reveal">
+          <h4>Community Events</h4>
+          <p>Regular tournaments, casual nights, and community-driven events.</p>
+        </div>
+        <div class="feature reveal">
+          <h4>Supportive Culture</h4>
+          <p>Respectful environment with clear rules and fair moderation.</p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Synex Esports — All Rights Reserved</p>
+    <div class="container">
+      <p>© 2025 Synex Esports — All Rights Reserved</p>
+    </div>
   </footer>
-  <button id="backToTop">↑</button>
+
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
   <script src="script.js" defer></script>
 </body>
 </html>

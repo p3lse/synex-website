@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>About • Synex Esports</title>
+  <meta name="description" content="About Synex Esports" />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,20 +14,22 @@
         <a href="index.html"><h1 class="brand-title">Synex Esports</h1></a>
         <p class="brand-sub">Professional • Fair • Community Driven</p>
       </div>
-      <nav class="top-nav">
+
+      <nav class="top-nav" role="navigation" aria-label="Primary">
         <ul>
-          <li><a href="index.html">Welcome</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="apps.html">Applications</a></li>
-          <li><a href="team.html">Meet Our Team</a></li>
-          <li><a href="roster.html">Roster</a></li>
+          <li><a href="index.html" class="nav-link">Welcome</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="apps.html" class="nav-link">Applications</a></li>
+          <li><a href="team.html" class="nav-link">Meet Our Team</a></li>
+          <li><a href="roster.html" class="nav-link">Roster</a></li>
+          <li><a href="socials.html" class="nav-link">Socials</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="section">
+  <main class="main">
+    <section class="section container">
       <h2 class="section-title">About Synex Esports</h2>
       <div class="card about-card reveal">
         <p><strong>Donated by Lucas</strong> — any updates feel free to DM him. Synex Esports was created to bring players together in a fair, fun, and competitive environment. We emphasize training, clear moderation, and community events that welcome players of all skill levels.</p>
@@ -36,9 +39,13 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Synex Esports — All Rights Reserved</p>
+    <div class="container">
+      <p>© 2025 Synex Esports — All Rights Reserved</p>
+    </div>
   </footer>
-  <button id="backToTop">↑</button>
+
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
   <script src="script.js" defer></script>
 </body>
 </html>
